@@ -16,10 +16,7 @@ pub fn part_one(input: &str) -> Option<u32> {
         })
         .collect();
 
-    let answer = multiplications
-        .iter()
-        .map(|(a, b)| a * b)
-        .sum();
+    let answer = multiplications.iter().map(|(a, b)| a * b).sum();
 
     Some(answer)
 }
@@ -28,7 +25,7 @@ pub fn part_two(input: &str) -> Option<u32> {
     let command_re = Regex::new(
         r"(?<multiplication>mul\((\d+),(\d+)\))|(?<dokeyword>do\(\))|(?<dontkeyword>don't\(\))",
     )
-        .unwrap();
+    .unwrap();
 
     let commands: Vec<Either<(u32, u32), &str>> = command_re
         .captures_iter(input)
