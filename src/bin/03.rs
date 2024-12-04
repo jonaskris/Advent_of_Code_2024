@@ -26,13 +26,13 @@ pub fn part_two(input: &str) -> Option<u32> {
         r"(?<multiplication>mul\((\d+),(\d+)\))|(?<dokeyword>do\(\))|(?<dontkeyword>don't\(\))",
     )
     .unwrap();
+    let multiplication_re = Regex::new(r"mul\((\d+),(\d+)\)").unwrap();
 
     let commands: Vec<Either<(u32, u32), &str>> = command_re
         .captures_iter(input)
         .filter_map(|cap| {
             if let Some(multiplication) = cap.name("multiplication") {
-                let nums: Option<(u32, u32)> = Regex::new(r"mul\((\d+),(\d+)\)")
-                    .unwrap()
+                let nums: Option<(u32, u32)> = multiplication_re
                     .captures(multiplication.as_str())
                     .and_then(|cap| {
                         Some((
