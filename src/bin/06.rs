@@ -159,9 +159,7 @@ pub fn part_one(input: &str) -> Option<u32> {
 
     let mut status_iter = std::iter::from_fn(|| parsed.guard.move_guard(&mut parsed.lab));
 
-    while let Some(_) = status_iter.next() {
-
-    }
+    while let Some(_) = status_iter.next() {}
 
     let answer = parsed
         .lab
@@ -201,15 +199,21 @@ pub fn part_two(input: &str) -> Option<u32> {
 
         let mut slow_guard = guard.clone();
         let mut fast_guard = guard.clone();
-        while let Some(_) =  slow_guard.move_guard(&mut lab_clone_with_obstacle) {
-            if let None = fast_guard.move_guard(&mut lab_clone_with_obstacle) {break;}
-            if let None = fast_guard.move_guard(&mut lab_clone_with_obstacle) {break;}
+        while let Some(_) = slow_guard.move_guard(&mut lab_clone_with_obstacle) {
+            if let None = fast_guard.move_guard(&mut lab_clone_with_obstacle) {
+                break;
+            }
+            if let None = fast_guard.move_guard(&mut lab_clone_with_obstacle) {
+                break;
+            }
 
-            if slow_guard.position == fast_guard.position && slow_guard.direction == fast_guard.direction {
+            if slow_guard.position == fast_guard.position
+                && slow_guard.direction == fast_guard.direction
+            {
                 answer += 1;
                 break;
             };
-        };
+        }
     }
 
     Some(answer)
